@@ -1,0 +1,46 @@
+# errata:
+# - A travis bug causes caches to trample eachother when using the same
+#   compiler key (which we don't use anyway). This is worked around for now by
+#   replacing the "compilers" with a build name prefixed by the no-op ":"
+#   command. See: https://github.com/travis-ci/travis-ci/issues/4393
+# - sudo/dist/group are set so as to get Blue Box VMs, necessary for [loopback]
+#   IPv6 support
+
+sudo: required
+dist: precise
+group: legacy
+
+os: linux
+language: cpp
+compiler: gcc
+matrix:
+  include:
+    - os: linux
+      dist: xenial
+      sudo: required
+      env: $TRAVIS_OS_NAME="linux"
+#    - os: linux
+#      dist: bionic
+#      sudo: required
+#      env: $TRAVIS_OS_NAME="win"
+#    - os: osx
+#      osx_image: xcode10.1
+#      env: $TRAVIS_OS_NAME="osx"
+
+before_install:
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get update; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get install build-essential pkg-config libc6-dev m4 g++-multilib autoconf libtool ncurses-dev unzip git python python-zmq zlib1g-dev wget curl bsdmainutils automake; fi
+#  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"; fi
+#  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update; fi
+#  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install cmake autoconf libtool automake coreutils pkgconfig gmp wget; fi
+#  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install gcc5 --without-multilib; fi
+#  - if [[ "$TRAVIS_OS_NAME" == "win" ]]; then sudo apt-get update; fi
+#  - if [[ "$TRAVIS_OS_NAME" == "win" ]]; then sudo apt-get install build-essential pkg-config libc6-dev m4 g++-multilib autoconf libtool ncurses-dev unzip git python curl zlib1g-dev wget bsdmainutils automake cmake mingw-w64; fi
+#  - if [[ "$TRAVIS_OS_NAME" == "win" ]]; then sudo update-alternatives --set x86_64-w64-mingw32-gcc /usr/bin/x86_64-w64-mingw32-gcc-posix; fi
+#  - if [[ "$TRAVIS_OS_NAME" == "win" ]]; then sudo update-alternatives --set x86_64-w64-mingw32-g++ /usr/bin/x86_64-w64-mingw32-g++-posix; fi
+script:
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then ./zcutil/build.sh -j4; fi
+#  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then ./zcutil/fetch-params.sh -j4; fi
+#  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then ./src/vcoin-gtest -j4; fi
+#  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ./zcutil/build.sh -j4; fi
+#  - if [[ "$TRAVIS_OS_NAME" == "win" ]]; then ./zcutil/build-win.sh -j4; fi

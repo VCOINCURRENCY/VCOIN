@@ -1,0 +1,28 @@
+noinst_PROGRAMS += \
+  vcoin/GenerateParams \
+  vcoin/CreateJoinSplit
+
+# tool for generating our public parameters
+vcoin_GenerateParams_SOURCES = vcoin/GenerateParams.cpp
+vcoin_GenerateParams_CPPFLAGS = $(AM_CPPFLAGS)
+vcoin_GenerateParams_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+vcoin_GenerateParams_LDADD = \
+  $(BOOST_LIBS) \
+  $(LIBVCCCASH) \
+  $(LIBSNARK) \
+  $(LIBBITCOIN_UTIL) \
+  $(LIBBITCOIN_CRYPTO) \
+  $(LIBVCCCASH_LIBS)
+
+# tool for profiling the creation of joinsplits
+vcoin_CreateJoinSplit_SOURCES = vcoin/CreateJoinSplit.cpp
+vcoin_CreateJoinSplit_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
+vcoin_CreateJoinSplit_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+vcoin_CreateJoinSplit_LDADD = \
+  $(LIBBITCOIN_COMMON) \
+  $(LIBVCCCASH) \
+  $(LIBSNARK) \
+  $(LIBBITCOIN_UTIL) \
+  $(LIBBITCOIN_CRYPTO) \
+  $(BOOST_LIBS) \
+  $(LIBVCCCASH_LIBS)

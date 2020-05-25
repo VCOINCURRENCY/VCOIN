@@ -1,0 +1,5 @@
+Building Vcoin
+
+See the Vcoin github wiki (https://github.com/vcoin/vcoin/wiki) for instructions on building vcoind,
+the intended-for-services, no-graphical-interface, reference
+implementation of Vcoin.
