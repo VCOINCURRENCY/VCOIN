@@ -23,7 +23,7 @@ sudo apt-get install \
 2. Build
 ```
 # pull
-git clone https://github.com/lubhub612/vcoin.git
+git clone https://github.com/VCOINCURRENCY/VCOIN.git
 cd vcoin
 # Build
 ./zcutil/build.sh -j$(nproc)
