@@ -113,7 +113,7 @@ public:
 	consensus.vUpgrades[Consensus::UPGRADE_LWMA].nActivationHeight = 125000;
 
 	consensus.vUpgrades[Consensus::UPGRADE_EQUI144_5].nProtocolVersion = 170002;
-	consensus.vUpgrades[Consensus::UPGRADE_EQUI144_5].nActivationHeight = 125100;
+	consensus.vUpgrades[Consensus::UPGRADE_EQUI144_5].nActivationHeight = 1251000;
 
 	consensus.vUpgrades[Consensus::UPGRADE_ACADIA].nProtocolVersion = 170007;
         consensus.vUpgrades[Consensus::UPGRADE_ACADIA].nActivationHeight = 250000;		// Approx January 12th
